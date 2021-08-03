@@ -80,7 +80,7 @@ public class Guard : MonoBehaviour
         TopOfTheTree = Selector_First;
     }
 
-    void FixedUpdate()
+    void Update()
     {
         TopOfTheTree.OnUpdate();
     }

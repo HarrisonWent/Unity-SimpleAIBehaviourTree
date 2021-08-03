@@ -31,11 +31,24 @@ public class AISight : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Last known location of target before losing sight
+    /// </summary>
+    /// <returns></returns>
     public Vector3 GetLastKnownPosition()
     {
         return LastKnownPosition;
     }
 
+    /// <summary>
+    /// Searches for a target
+    /// </summary>
+    /// <param name="MaxRange">Maximum distance target can be</param>
+    /// <param name="UseRay">If true sight will be checked for targets</param>
+    /// <param name="useClosest">If true closest enemies will be returned</param>
+    /// <param name="NonRayFallback">If true enemies which cannot be seen will be returned if there are none that can be seen</param>
+    /// <param name="UseAngle">If true it will require sight within a 180 degree angle forwards</param>
+    /// <returns></returns>
     public GameObject GetMeATarget(float MaxRange, bool UseRay, bool useClosest, bool NonRayFallback, bool UseAngle)
     {
         List<AISight> Targets = new List<AISight>(); 
@@ -127,6 +140,12 @@ public class AISight : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if a target can be seen
+    /// </summary>
+    /// <param name="Target">The target object to check sight with</param>
+    /// <param name="UseAngle">If true it will require sight within a 180 degree angle forwards</param>
+    /// <returns>If can see</returns>
     public bool CheckVisibility(GameObject Target, bool UseAngle)
     {
         RaycastHit hit;

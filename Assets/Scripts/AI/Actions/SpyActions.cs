@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
-//Action move to the intel location
+/// <summary>
+/// Move to the intel location
+/// </summary>
 public class Action_SeekIntel : Node
 {
     private NavMeshAgent MyAgent;
@@ -24,7 +26,7 @@ public class Action_SeekIntel : Node
 
         MyAgent.SetDestination(TargetLocation);
 
-        Debug.Log(Vector3.Distance(MyAgent.nextPosition, TargetLocation));
+        //Debug.Log(Vector3.Distance(MyAgent.nextPosition, TargetLocation));
         if (Vector3.Distance(MyAgent.nextPosition, TargetLocation) < 1.5f)
         {
             SceneManager.LoadScene(0);
@@ -46,7 +48,9 @@ public class Action_SeekIntel : Node
     }
 }
 
-//Action have i been caught
+/// <summary>
+/// Check if spy has been caught
+/// </summary>
 public class Action_CheckIfCaught : Node
 {
     private AISight MySight;
@@ -76,7 +80,9 @@ public class Action_CheckIfCaught : Node
     }
 }
 
-//Action Am i being chased
+/// <summary>
+/// Check if being chashed/guard nearby
+/// </summary>
 public class Action_CheckIfBeingChased : Node
 {
     private AISight MySight;
@@ -103,7 +109,9 @@ public class Action_CheckIfBeingChased : Node
     }
 }
 
-//Action Run to hiding spot
+/// <summary>
+/// Run to hiding spot
+/// </summary>
 public class Action_RunToHide : Node
 {
     private NavMeshAgent MyAgent;
@@ -119,6 +127,7 @@ public class Action_RunToHide : Node
         MySight = m_Sight;
     }
 
+    private float MinimumHideTime = 3, HideCounter = 0f;
     public override TaskStatus ActionUpdate()
     {
         //Get the closeset hiding spot
@@ -141,7 +150,17 @@ public class Action_RunToHide : Node
         if (MyAgent.remainingDistance < 1f)
         {
             MySight.MyVisualState = AISight.VisualState.Hidden;
-            return TaskStatus.Failure;
+
+            //Hide in the safe space for a minimum amount of time
+            if (HideCounter > MinimumHideTime)
+            {
+                HideCounter = 0f;
+                return TaskStatus.Failure;
+            }
+            else
+            {
+                HideCounter +=Time.deltaTime;
+            }
         }
         else
         {

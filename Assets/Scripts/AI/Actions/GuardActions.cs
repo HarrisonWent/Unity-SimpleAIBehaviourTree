@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-//Action can see enemy
+/// <summary>
+/// Check if can see enemy
+/// </summary>
 public class Action_SuspicousEvent : Node
 {
     int EyeSightRange = 10;
@@ -14,6 +16,7 @@ public class Action_SuspicousEvent : Node
         MySight = NewSight;
     }
 
+    // Updates the state of the task
     public override TaskStatus ActionUpdate()
     {
         //Debug.Log("Action: Check to see enemy!");
@@ -37,7 +40,9 @@ public class Action_SuspicousEvent : Node
     }
 }
 
-//Action investiagte enemies last known position
+/// <summary>
+/// Investigate enemies last known position
+/// </summary>
 public class Action_Investigate : Node
 {
     float TimeToSpot = 1.5f;
@@ -105,7 +110,9 @@ public class Action_Investigate : Node
     }
 }
 
-//Action Sleep for duration
+/// <summary>
+/// Sleep for a duration
+/// </summary>
 public class Action_SleepForDuration : Node
 {
     public float SleepRemaining = 10;
@@ -145,7 +152,9 @@ public class Action_SleepForDuration : Node
     }
 }
 
-//Action chase the enemy
+/// <summary>
+/// Chases the sighted enemy
+/// </summary>
 public class Action_Chase : Node
 {
     int MaxDistance = 10;
@@ -192,10 +201,11 @@ public class Action_Chase : Node
     }
 }
 
-//Action patrol random areas
+/// <summary>
+/// Patrol random areas
+/// </summary>
 public class Action_Patrol : Node
 {
-    int MaxDistance = 10;
     private Action_SleepForDuration MySleep;
     private NavMeshAgent MyAgent;
     int MapSize = 25;

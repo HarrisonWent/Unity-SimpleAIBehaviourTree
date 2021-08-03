@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//Used by Sequences, Selectors and actions
+//
+/// <summary>
+/// Used by Sequences, Selectors and actions
+/// </summary>
 public class Node
 {
     public enum TaskStatus
@@ -32,7 +35,10 @@ public class Node
 
     private Node[] MySubNodes;
 
-    //Update the required SubNodes for the type of node this is
+    /// <summary>
+    /// Update the required SubNodes for the type of node this is
+    /// </summary>
+    /// <returns></returns>
     public TaskStatus OnUpdate()
     {
         TaskStatus CurrentStatus = TaskStatus.Failure;
@@ -54,14 +60,20 @@ public class Node
         return CurrentStatus;        
     }
 
-    //Carrys out an action, this is the one custom actions are put into
+    /// <summary>
+    /// Carrys out an action, this is the one custom actions are put into
+    /// </summary>
+    /// <returns></returns>
     public virtual TaskStatus ActionUpdate()
     {
         Debug.LogWarning("Action hasn't been overriden");
         return TaskStatus.Failure;
     }
 
-    //Executes all sub actions sequentially, stops if an action fails and returns failure
+    /// <summary>
+    /// Executes all sub actions sequentially, stops if an action fails and returns failure
+    /// </summary>
+    /// <returns></returns>
     public TaskStatus SequenceUpdate()
     {
         //Debug.Log("***Sequence Check***");
@@ -79,8 +91,11 @@ public class Node
     }
 
     public virtual NodeType GetNodeType() { return BaseType; }
-
-    //Executes all sub actions sequentially, stops after the first success
+    
+    /// <summary>
+    /// Executes all sub actions sequentially, stops after the first success
+    /// </summary>
+    /// <returns></returns>
     public TaskStatus SelectorUpdate()
     {
         //Debug.Log("***Selector***");

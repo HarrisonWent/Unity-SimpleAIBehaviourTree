@@ -11,6 +11,9 @@ public class NPC_UI : MonoBehaviour
     public string MyName = "Unnamed";
     public Image MyFollowUI;
 
+    /// <summary>
+    /// Adds an info panel for this AI agent
+    /// </summary>
     public void SpawnMyPanel()
     {
         if (!GameObject.Find("Panel(PlayerList)")) 
@@ -55,6 +58,10 @@ public class NPC_UI : MonoBehaviour
         Sleep
     }
     public Sprite Chase, Investigate, Patrol, Sleep;
+    /// <summary>
+    /// Updates the info panel with the current state
+    /// </summary>
+    /// <param name="NewState"></param>
     public void SetToVisualState(States NewState)
     {
         switch (NewState)
